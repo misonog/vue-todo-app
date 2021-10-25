@@ -1,24 +1,10 @@
 # vue-todo-app
 
-## Project setup
-```
-npm install
-```
+このリポジトリは[Vue.js の基本](https://bootcamp.fjord.jp/practices/171) の ToDo アプリ提出用です。
 
-### Compiles and hot-reloads for development
-```
-npm run serve
-```
+## Setup & Run
 
-### Compiles and minifies for production
+```shell
+$ npm install
+$ npm run serve
 ```
-npm run build
-```
-
-### Lints and fixes files
-```
-npm run lint
-```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).

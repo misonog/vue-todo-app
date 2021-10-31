@@ -11,6 +11,10 @@
     <form v-on:submit.prevent="addTask">
       <input type="text" v-model="newTaskName" placeholder="新しいタスク">
     </form>
+
+    <h1>保存と復元</h1>
+    <button type="button" v-on:click="save">保存</button>
+    <button type="button" v-on:click="restore">復元</button>
   </div>
 </template>
 
@@ -42,6 +46,14 @@ export default {
       this.$store.commit('toggleTaskStatus', {
         id: task.id
       })
+    },
+
+    save () {
+      this.$store.dispatch('save')
+    },
+
+    restore () {
+      this.$store.dispatch('restore')
     }
   }
 }

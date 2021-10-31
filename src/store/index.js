@@ -38,6 +38,30 @@ export default createStore({
       filtered.forEach(task => {
         task.done = !task.done
       })
+    },
+
+    restore (state, { tasks, nextTaskId }) {
+      state.tasks = tasks
+      state.nextTaskId = nextTaskId
+    }
+  },
+
+  actions: {
+    // ローカルストレージにステートを保存する
+    save ({ state }) {
+      const data = {
+        tasks: state.tasks,
+        nextTaskId: state.nextTaskId
+      }
+      localStorage.setItem('task-app-data', JSON.stringify(data))
+    },
+
+    // ローカルストレージからステートを復元する
+    restore ({ commit }) {
+      const data = localStorage.getItem('task-app-data')
+      if (data) {
+        commit('restore', JSON.parse(data))
+      }
     }
   }
 })

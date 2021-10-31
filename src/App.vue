@@ -5,6 +5,7 @@
       <li v-for="task in tasks" v-bind:key="task.id">
         <input type="checkbox" v-bind:checked="task.done" v-on:change="toggleTaskStatus(task)">
         {{ task.name }}
+        <button type="button" v-on:click="deleteTask(task)">削除</button>
       </li>
     </ul>
 
@@ -44,6 +45,12 @@ export default {
 
     toggleTaskStatus (task) {
       this.$store.commit('toggleTaskStatus', {
+        id: task.id
+      })
+    },
+
+    deleteTask (task) {
+      this.$store.commit('deleteTask', {
         id: task.id
       })
     },

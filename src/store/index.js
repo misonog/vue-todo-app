@@ -40,6 +40,11 @@ export default createStore({
       })
     },
 
+    deleteTask (state, { id }) {
+      const index = state.tasks.findIndex(task => task.id === id)
+      state.tasks.splice(index, 1)
+    },
+
     restore (state, { tasks, nextTaskId }) {
       state.tasks = tasks
       state.nextTaskId = nextTaskId

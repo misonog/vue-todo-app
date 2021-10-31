@@ -6,12 +6,14 @@ export default createStore({
       {
         id: 1,
         name: '牛乳を買う',
-        done: false
+        done: false,
+        editable: false
       },
       {
         id: 2,
         name: 'Vue.jsの本を買う',
-        done: true
+        done: true,
+        editable: false
       }
     ],
 
@@ -24,7 +26,8 @@ export default createStore({
       state.tasks.push({
         id: state.nextTaskId,
         name,
-        done: false
+        done: false,
+        editable: false
       })
 
       state.nextTaskId++
@@ -37,6 +40,26 @@ export default createStore({
 
       filtered.forEach(task => {
         task.done = !task.done
+      })
+    },
+
+    updateTask (state, { task }) {
+      const index = state.tasks.findIndex(t => t.id === task.id)
+      state.tasks.splice(index, 1, {
+        id: task.id,
+        name: task.name,
+        done: task.done,
+        editable: false
+      })
+    },
+
+    makeEditable (state, { id }) {
+      const filtered = state.tasks.filter(task => {
+        return task.id === id
+      })
+
+      filtered.forEach(task => {
+        task.editable = true
       })
     },
 

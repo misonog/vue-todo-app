@@ -4,7 +4,10 @@
     <ul>
       <li v-for="task in tasks" v-bind:key="task.id">
         <input type="checkbox" v-bind:checked="task.done" v-on:change="toggleTaskStatus(task)">
-        {{ task.name }}
+        <span v-if="!task.editable">{{ task.name }}</span>
+        <input v-else type="text" v-model="task.name">
+        <button v-if="!task.editable" type="button" v-on:click="makeEditable(task)">編集</button>
+        <button v-else type="button" v-on:click="updateTask(task)">更新</button>
         <button type="button" v-on:click="deleteTask(task)">削除</button>
       </li>
     </ul>
@@ -46,6 +49,18 @@ export default {
     toggleTaskStatus (task) {
       this.$store.commit('toggleTaskStatus', {
         id: task.id
+      })
+    },
+
+    makeEditable (task) {
+      this.$store.commit('makeEditable', {
+        id: task.id
+      })
+    },
+
+    updateTask (task) {
+      this.$store.commit('updateTask', {
+        task: task
       })
     },
 
